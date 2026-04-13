@@ -13,10 +13,10 @@
 <body>
     <div id="diceCont">
         <div id="playerTurn">1</div>
-        
-        <!-- <button onClick="HandleRoll()" id="diceBtn">ROLL</button> -->
+        <input type="text" id="diceNumberTxt" width="10"/>
         <div id="RollDiceRoot"></div>
          <p id="diceNumber">Dice number: 0</p>
+        <div id="positionMessage">Message:</div>
     </div>
     
     <div class="board">
@@ -323,37 +323,48 @@
     <script type="text/babel">
         
 
-        function RollDiceRoot() {
-            const playerCount = 2;
+        function RollDiceRoot()
+        {
+            const playerCount = 1;
             const [player, setPlayer] = React.useState(1);
-            /*const [player, setPlayer] = React.useState(() => {
-                const obj = {};
-                for (let i = 1; i <= playerCount; i++) {
-                    obj["p" + i] = 1;
-                }
-                return obj;
-            });*/
-
+            
+            document.getElementById('diceNumberTxt').value = Math.floor(Math.random() * 6) + 1;
             document.getElementById('playerTurn').innerHTML = 'Player '+player+' turn:';
 
-            function HandleRoll() {
-                const rollNum = Math.floor(Math.random() * 6) + 1;
+            function HandleRoll()
+            {
+                const rollNum = document.getElementById('diceNumberTxt').value;
+                //Math.floor(Math.random() * 6) + 1;
+                
+                if (isNaN(rollNum)) {
+                    alert('Please use number only');
+                    return;
+                }
+                if(Number(rollNum) < 1 || Number(rollNum) > 6)
+                {
+                    alert('Please use dice number between 1 to 6');
+                    return;
+                }
+
+                console.log('player ' + player);
+
                 document.getElementById('diceNumber').innerHTML = 'Dice number: ' + rollNum;
                 console.log('roll dice ' + rollNum);
                 
-                console.log('player ' + player);
+                
 
                 //get current player position
-                let positionPly = parseInt(document.getElementById('p'+player+'pos')?.innerHTML || "0", 10);
+                let positionPly = Number(document.getElementById('p'+player+'pos').innerHTML);
+                //console.log('positionPly1 '+positionPly);
 
                 //update player position
-                positionPly += rollNum;
+                positionPly += rollNum * 1;
                 if(positionPly >= 100){
                     positionPly = 100;
                     alert('Player ' + player + ' wins');
                 }
 
-                positionPly = checkPosition(positionPly);
+                positionPly = checkPosition(positionPly, "Player "+ player);
                 document.getElementById('p'+player+'pos').innerHTML = positionPly;
 
                 const el = document.getElementById('p'+player);
@@ -364,6 +375,9 @@
                 console.log('positionPly '+positionPly);
                 const box = document.getElementById("b" + positionPly);
                 box.innerHTML += '<span id="p' + player +'">(P' + player +')</span>';
+
+                document.getElementById('p' + player +'display').innerHTML = 'P'+player+ ': '+
+                ShowDisplay(positionPly);
                 
                 if(rollNum !== 6)
                 {
@@ -375,16 +389,23 @@
 
                     document.getElementById('playerTurn').innerHTML = 'Player '+player+' turn:';
                 }
+
+                document.getElementById('diceNumberTxt').value = Math.floor(Math.random() * 6) + 1;
             }
 
             return (
                 <div>
-                    <button onClick={HandleRoll}>Roll Dice</button>
+                    <button onClick={HandleRoll}>Move</button>
                     <div style={{ display: "none" }}>
                     {Array.from({ length: playerCount }, (_, i) => (
                         <div key={i} id={`p${i + 1}pos`}>
                         0
                         </div>
+                    ))}
+                    </div>
+                    <div>
+                    {Array.from({ length: playerCount }, (_, i) => (
+                        <div key={i} id={`p${i + 1}display`}></div>
                     ))}
                     </div>
                 </div>
@@ -395,16 +416,34 @@
         RDroot.render(<RollDiceRoot />);
     </script>
     <script>
-        colorSnakesAndLadders();
+    colorSnakesAndLadders();
+
     document.querySelectorAll('.box').forEach(div => {
         const id = div.id;
         const number = id.replace('b', '');
         
-        // Only insert if empty (so existing values like 100, 54, 1 are not overwritten)
         if (div.innerText.trim() === '') {
             div.innerText = number;
         }
     });
+
+    function ShowDisplay(boxnumber)
+    {
+        let display = "";
+
+        if (boxnumber % 3 == 0)
+            display += "foo";
+        if (boxnumber % 4 == 0)
+            display += "baz";
+        if (boxnumber % 5 == 0)
+            display += "bar";
+        if (boxnumber % 7 == 0)
+            display += "jazz";
+        if (boxnumber % 9 == 0)
+            display += "huzz";
+
+        return display;
+    }
 
     function SnakesAndLaddersBox()
     {
@@ -412,25 +451,30 @@
             [2, 38], [7, 14], [8, 31], [15, 26], [28, 84],
             [16, 6], [40, 11], [62, 19], [64, 60], [99, 80]
         ];
-        
     }
 
-    function checkPosition(position) {
+    function checkPosition(position, player) {
+        document.getElementById("positionMessage").innerHTML = "";
         const found = SnakesAndLaddersBox().find(([from]) => from === position);
 
         if (found) {
             const [from, to] = found;
 
             if (to > from) {
-            console.log("Ladder! Go up 🚀");
+                console.log("Ladder! Go up 🚀");
+                document.getElementById("positionMessage").innerHTML = 
+                'Message: '+ player + ' going up 🚀, from ' + from +' to ' + to;
             } else {
-            console.log("Snake! Go down 🐍");
+                console.log("Snake! Go down 🐍");
+                
+                document.getElementById("positionMessage").innerHTML = 
+                'Message: '+ player + ' going down 🐍, from ' + from +' to ' + to;
             }
 
             return to; // move player
         }
 
-        return position; // no change
+        return position;
     }
 
     function colorSnakesAndLadders() {
