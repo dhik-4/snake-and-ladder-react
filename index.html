@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ladder & Snake Dhika</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" href="game.css">
+</head>
+
+<!-- sumber: https://www.youtube.com/watch?v=kcnwI_5nKyA -->
+<body>
+    <div id="diceCont">
+        <div id="playerTurn">1</div>
+        
+        <!-- <button onClick="HandleRoll()" id="diceBtn">ROLL</button> -->
+        <div id="RollDiceRoot"></div>
+         <p id="diceNumber">Dice number: 0</p>
+    </div>
+    
+    <div class="board">
+        <div class="box" id="b100">100
+        </div>
+        <div class="box" id="b99">
+
+        </div>
+        <div class="box" id="b98">
+
+        </div>
+        <div class="box" id="b97">
+
+        </div>
+        <div class="box" id="b96">
+
+        </div>
+        <div class="box" id="b95">
+
+        </div>
+        <div class="box" id="b94">
+
+        </div>
+        <div class="box" id="b93">
+
+        </div>
+        <div class="box" id="b92">
+
+        </div>
+        <div class="box" id="b91">
+
+        </div>
+        <div class="box" id="b81">
+
+        </div>
+        <div class="box" id="b82">
+
+        </div>
+        <div class="box" id="b83">
+
+        </div>
+        <div class="box" id="b84">
+
+        </div>
+        <div class="box" id="b85">
+
+        </div>
+        <div class="box" id="b86">
+
+        </div>
+        <div class="box" id="b87">
+
+        </div>
+        <div class="box" id="b88">
+
+        </div>
+        <div class="box" id="b89">
+
+        </div>
+        <div class="box" id="b90">
+
+        </div>
+        <div class="box" id="b80">
+
+        </div>
+        <div class="box" id="b79">
+
+        </div>
+        <div class="box" id="b78">
+
+        </div>
+        <div class="box" id="b77">
+
+        </div>
+        <div class="box" id="b76">
+
+        </div>
+        <div class="box" id="b75">
+
+        </div>
+        <div class="box" id="b74">
+
+        </div>
+        <div class="box" id="b73">
+
+        </div>
+        <div class="box" id="b72">
+
+        </div>
+        <div class="box" id="b71">
+
+        </div>
+        <div class="box" id="b61">
+
+        </div>
+        <div class="box" id="b62">
+
+        </div>
+        <div class="box" id="b63">
+
+        </div>
+        <div class="box" id="b64">
+
+        </div>
+        <div class="box" id="b65">
+
+        </div>
+        <div class="box" id="b66">
+
+        </div>
+        <div class="box" id="b67">
+
+        </div>
+        <div class="box" id="b68">
+
+        </div>
+        <div class="box" id="b69">
+
+        </div>
+        <div class="box" id="b70">
+
+        </div>
+        <div class="box" id="b60">
+
+        </div>
+        <div class="box" id="b59">
+
+        </div>
+        <div class="box" id="b58">
+
+        </div>
+        <div class="box" id="b57">
+
+        </div>
+        <div class="box" id="b56">
+
+        </div>
+        <div class="box" id="b55">
+
+        </div>
+        <div class="box" id="b54"></div>
+        <div class="box" id="b53">
+
+        </div>
+        <div class="box" id="b52">
+
+        </div>
+        <div class="box" id="b51">
+
+        </div>
+        <div class="box" id="b41">
+
+        </div>
+        <div class="box" id="b42">
+
+        </div>
+        <div class="box" id="b43">
+
+        </div>
+        <div class="box" id="b44">
+
+        </div>
+        <div class="box" id="b45">
+
+        </div>
+        <div class="box" id="b46">
+
+        </div>
+        <div class="box" id="b47">
+
+        </div>
+        <div class="box" id="b48">
+
+        </div>
+        <div class="box" id="b49">
+
+        </div>
+        <div class="box" id="b50">
+
+        </div>
+        <div class="box" id="b40">
+
+        </div>
+        <div class="box" id="b39">
+
+        </div>
+        <div class="box" id="b38">
+
+        </div>
+        <div class="box" id="b37">
+
+        </div>
+        <div class="box" id="b36">
+
+        </div>
+        <div class="box" id="b35">
+
+        </div>
+        <div class="box" id="b34">
+
+        </div>
+        <div class="box" id="b33">
+
+        </div>
+        <div class="box" id="b32">
+
+        </div>
+        <div class="box" id="b31">
+
+        </div>
+        <div class="box" id="b21">
+
+        </div>
+        <div class="box" id="b22">
+
+        </div>
+        <div class="box" id="b23">
+
+        </div>
+        <div class="box" id="b24">
+
+        </div>
+        <div class="box" id="b25">
+
+        </div>
+        <div class="box" id="b26">
+
+        </div>
+        <div class="box" id="b27">
+
+        </div>
+        <div class="box" id="b28">
+
+        </div>
+        <div class="box" id="b29">
+
+        </div>
+        <div class="box" id="b30">
+
+        </div>
+        <div class="box" id="b20">
+
+        </div>
+        <div class="box" id="b19">
+
+        </div>
+        <div class="box" id="b18">
+
+        </div>
+        <div class="box" id="b17">
+
+        </div>
+        <div class="box" id="b16">
+
+        </div>
+        <div class="box" id="b15">
+
+        </div>
+        <div class="box" id="b14">
+
+        </div>
+        <div class="box" id="b13">
+
+        </div>
+        <div class="box" id="b12">
+
+        </div>
+        <div class="box" id="b11">
+                <!-- <p id="p1">P1</p> -->
+        </div>
+        <div class="box" id="b1">
+            
+        </div>
+        <div class="box" id="b2">
+
+        </div>
+        <div class="box" id="b3">
+
+        </div>
+        <div class="box" id="b4">
+
+        </div>
+        <div class="box" id="b5">
+
+        </div>
+        <div class="box" id="b6">
+
+        </div>
+        <div class="box" id="b7">
+
+        </div>
+        <div class="box" id="b8">
+
+        </div>
+        <div class="box" id="b9">
+
+        </div>
+        <div class="box" id="b10">
+
+        </div>
+    </div>
+
+    <!-- <script type="module" src="src/main.jsx"></script> -->
+    <script type="text/babel">
+        
+
+        function RollDiceRoot() {
+            const playerCount = 2;
+            const [player, setPlayer] = React.useState(1);
+            /*const [player, setPlayer] = React.useState(() => {
+                const obj = {};
+                for (let i = 1; i <= playerCount; i++) {
+                    obj["p" + i] = 1;
+                }
+                return obj;
+            });*/
+
+            document.getElementById('playerTurn').innerHTML = 'Player '+player+' turn:';
+
+            function HandleRoll() {
+                const rollNum = Math.floor(Math.random() * 6) + 1;
+                document.getElementById('diceNumber').innerHTML = 'Dice number: ' + rollNum;
+                console.log('roll dice ' + rollNum);
+                
+                console.log('player ' + player);
+
+                //get current player position
+                let positionPly = parseInt(document.getElementById('p'+player+'pos')?.innerHTML || "0", 10);
+
+                //update player position
+                positionPly += rollNum;
+                if(positionPly >= 100){
+                    positionPly = 100;
+                    alert('Player ' + player + ' wins');
+                }
+
+                positionPly = checkPosition(positionPly);
+                document.getElementById('p'+player+'pos').innerHTML = positionPly;
+
+                const el = document.getElementById('p'+player);
+                if (el) {
+                    el.remove();
+                }
+
+                console.log('positionPly '+positionPly);
+                const box = document.getElementById("b" + positionPly);
+                box.innerHTML += '<span id="p' + player +'">(P' + player +')</span>';
+                
+                if(rollNum !== 6)
+                {
+                    if (player >= playerCount){
+                        setPlayer(1);
+                    }else{
+                        setPlayer(player + 1);
+                    }
+
+                    document.getElementById('playerTurn').innerHTML = 'Player '+player+' turn:';
+                }
+            }
+
+            return (
+                <div>
+                    <button onClick={HandleRoll}>Roll Dice</button>
+                    <div style={{ display: "none" }}>
+                    {Array.from({ length: playerCount }, (_, i) => (
+                        <div key={i} id={`p${i + 1}pos`}>
+                        0
+                        </div>
+                    ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const RDroot = ReactDOM.createRoot(document.getElementById("RollDiceRoot"));
+        RDroot.render(<RollDiceRoot />);
+    </script>
+    <script>
+        colorSnakesAndLadders();
+    document.querySelectorAll('.box').forEach(div => {
+        const id = div.id;
+        const number = id.replace('b', '');
+        
+        // Only insert if empty (so existing values like 100, 54, 1 are not overwritten)
+        if (div.innerText.trim() === '') {
+            div.innerText = number;
+        }
+    });
+
+    function SnakesAndLaddersBox()
+    {
+        return [
+            [2, 38], [7, 14], [8, 31], [15, 26], [28, 84],
+            [16, 6], [40, 11], [62, 19], [64, 60], [99, 80]
+        ];
+        
+    }
+
+    function checkPosition(position) {
+        const found = SnakesAndLaddersBox().find(([from]) => from === position);
+
+        if (found) {
+            const [from, to] = found;
+
+            if (to > from) {
+            console.log("Ladder! Go up 🚀");
+            } else {
+            console.log("Snake! Go down 🐍");
+            }
+
+            return to; // move player
+        }
+
+        return position; // no change
+    }
+
+    function colorSnakesAndLadders() {
+
+        const data = SnakesAndLaddersBox();
+
+        data.forEach(([from, to]) => {
+            const fromDiv = document.getElementById("b" + from);
+            const toDiv = document.getElementById("b" + to);
+
+            if (!fromDiv || !toDiv) return;
+
+            if (to > from) {
+                // Ladder → green
+                fromDiv.style.backgroundColor = "green";
+                toDiv.style.backgroundColor = "lightgreen";
+            } else {
+                // Snake → red
+                fromDiv.style.backgroundColor = "red";
+                toDiv.style.backgroundColor = "pink";
+            }
+        });
+    }
+    </script>
+</body>
+</html>
